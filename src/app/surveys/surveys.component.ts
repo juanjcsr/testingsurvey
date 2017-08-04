@@ -7,7 +7,7 @@ import * as Survey from 'survey-angular';
   templateUrl: './surveys.component.html',
   styleUrls: ['./surveys.component.scss']
 })
-export class SurveysComponent implements OnChanges {
+export class SurveysComponent implements OnChanges, OnInit {
 
   @Output() theAnswers: any
   @Input() data;
@@ -171,6 +171,19 @@ export class SurveysComponent implements OnChanges {
   }
  ]
 }
+
+
+  ngOnInit() {
+    Survey.Survey.cssType = "bootstrap";
+    const surveyModel = new Survey.ReactSurveyModel(this.theJSON);
+    surveyModel.locale = "es";
+
+    surveyModel.onComplete.add((res, options) => {
+      this.theAnswers = res.data;
+    });
+    
+    Survey.SurveyNG.render("surveyElement", {model:surveyModel})
+  }
 
   ngOnChanges() {
 
