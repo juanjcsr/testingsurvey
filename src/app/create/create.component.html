@@ -1,0 +1,10 @@
+<p>
+  create works!
+</p>
+<div>
+  CREATE NEW SURVEY
+  <textarea #survey (change)="setJSONvalue(survey.value)" ></textarea>
+  <input type="button" value="CREATE" (click)="create()">
+</div>
+
+<app-surveys *ngIf="show" [data]="toSurvey"></app-surveys>
